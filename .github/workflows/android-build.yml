@@ -22,7 +22,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20' # <--- ¡AQUÍ ESTÁ LA CORRECCIÓN!
+          node-version: '20'
           cache: 'npm'
 
       - name: Install dependencies
@@ -33,6 +33,10 @@ jobs:
 
       - name: Sync Capacitor
         run: npx cap sync android
+
+      # --- ¡AQUÍ ESTÁ LA NUEVA LÍNEA MÁGICA! ---
+      - name: Make gradlew executable
+        run: chmod +x android/gradlew
 
       - name: Build debug APK
         run: cd android && ./gradlew assembleDebug
